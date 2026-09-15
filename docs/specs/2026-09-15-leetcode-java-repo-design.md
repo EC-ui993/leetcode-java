@@ -529,6 +529,10 @@ stringifyFrontmatter(data) // → string
 | 14 | **持续性靠降低摩擦，不靠意志力** | 把「最小可交付」压到 **1 题 / 15 分钟**（填 3 行思路也算完成）。**明确允许提交半成品**——特指笔记单薄，代码仍须能编译（§5.5 推论二）。周末集中补厚。目标是坚持 300 天，不是前两周很猛 |
 | 15 | **日期必须用本地时间计算** | UTC+8 时区下 00:00–08:00 刷题，用 `toISOString()` 会把日期记成前一天（§6.1） |
 | 16 | **只有 AC 的代码才入库** | 这是「不做每题测试」能够成立的前提：正确性由 LeetCode 判定，仓库只记录结论。未 AC 必须如实标 `未通过`（§5.5） |
+| 17 | **`.java` 文件必须是「UTF-8 无 BOM」** | javac 遇到 BOM 会直接报 `illegal character: '\ufeff'`。而 Windows 编辑器与 PowerShell 的 `Set-Content -Encoding UTF8` **默认写 BOM**。`check-compile.mjs` 已提前拦截并给出可操作提示 |
+| 18 | **依赖 javac 报错时，它默认是乱码** | javac 按系统区域输出本地化诊断（中文 Windows 上为 GBK 字节），终端按 UTF-8 解读就是乱码 —— 而编译失败时这是**唯一**的诊断来源。故 `check-compile.mjs` 固定传 `-J-Duser.language=en`，强制英文 ASCII 诊断 |
+
+第 17、18 条是**实现阶段实测发现**的（见 §13），都不在设计初稿里：它们不属于「结构设计」而属于「Windows 上的具体工具行为」，只有真跑一遍才会暴露。
 
 第 14 条将作为**显式规则**写入仓库 README（或 `docs/`），因为「每天一道」类计划最常见的死法是第 3 周目标过高后彻底断更。
 
@@ -625,5 +629,24 @@ Thumbs.db
 | 运行器 | Node 内置 `node:test` + `node:assert/strict` |
 | 依赖 | **零 npm 依赖** —— 与 §5.2「刷题仓库不该出现 node_modules」的原则一致 |
 | 位置 | `tools/tests/*.test.mjs` |
-| 命令 | `node --test tools/tests/` |
+| 命令 | `node --test "tools/tests/*.test.mjs"`（**不能**用目录形式 `tools/tests/`：Node 会把目录当模块 import，报 `ERR_UNSUPPORTED_DIR_IMPORT`） |
 | fixture | 建在系统临时目录，测试结束清理，不污染仓库工作区 |
+
+---
+
+## 13. 实现阶段的实测发现
+
+以下是**写代码并真跑一遍**才暴露的问题。它们在设计初稿里都不存在——不是设计时想漏了，而是这类问题属于「Windows 上具体工具的行为」，只能靠实跑暴露。记录下来，因为它们全都属于「不处理就会让人莫名其妙失败」的类型。
+
+| # | 发现 | 处理 |
+|---|---|---|
+| 1 | **`node --test <目录>` 不可用** | Node 把目录当模块 `import`，报 `ERR_UNSUPPORTED_DIR_IMPORT`。正确命令是 `node --test "tools/tests/*.test.mjs"`。设计初稿写错了命令，已修正（§12.1） |
+| 2 | **javac 诊断默认是乱码** | 中文 Windows 上 javac 输出 GBK 字节，终端按 UTF-8 读即乱码。因编译失败时这是唯一诊断来源，故固定加 `-J-Duser.language=en` 强制英文 |
+| 3 | **BOM 会让 javac 直接失败** | Windows 编辑器与 `Set-Content -Encoding UTF8` 默认写 BOM，javac 报 `illegal character: '\ufeff'`。`check-compile.mjs` 增加 BOM 预检并给出可操作提示 |
+| 4 | **模板的规范说明被复制进每道题** | 模板里的 HTML 注释是「模板文档」，却会出现在每道题的笔记里。改为：脚手架生成时**剥离 HTML 注释**（正文里的填写提示是普通文本，保留） |
+| 5 | **`Get-Content` 读 UTF-8 显示乱码** | PowerShell 5.1 的 `Get-Content` 默认按 ANSI 解读，读正确写入的 UTF-8 文件会显示成乱码，**极易误判为文件损坏**。排查时必须用 `[System.IO.File]::ReadAllText(path, [Text.Encoding]::UTF8)`。这条在实现中真的把作者绊了一次 |
+| 6 | **索引里绝不能有生成时间戳** | 否则每次运行文件都变，幂等性失效、git diff 全是噪音。已加专门的回归测试守住 |
+| 7 | **`existsSync` 守卫在正常情况下不可达** | 目标目录存在时，「题号查重」总是先命中，所以「拒绝覆盖」分支走不到。需要专门构造同名**文件**占用路径的场景才能真正验证它 |
+| 8 | **中文参数传递本身没问题** | 实测 PowerShell 5.1 → Node 的中文 `--tags 数组,哈希表` 码点完好。**因此不需要**为编码做任何额外设计（避免了一次无谓的过度设计） |
+
+第 8 条同样重要：它是**被实测否定的担忧**。如果不实测，很可能会为「可能存在的编码问题」白加一套交互式输入机制。
