@@ -28,7 +28,8 @@ const USAGE = `用法：
   node tools/build-index.mjs [--check] [--dry-run] [--root <仓库根>]
 
 选项：
-  --check     只校验不写盘（供 CI / 提交前钩子使用），有违规则退出码 1
+  --check     只校验不写盘（供 CI / 提交前钩子使用）：既校验元数据合法性，
+              也比对索引内容是否已过期（例如加了题却忘了重建索引）。有违规则退出码 1
   --dry-run   渲染并打印，但不写盘
   --root      指定仓库根（默认由脚本位置推导）
 
@@ -297,11 +298,20 @@ export function runBuildIndex(argv, opts = {}) {
   const readmeSrc = fs.existsSync(readmePath) ? fs.readFileSync(readmePath, 'utf8') : null;
   const tagSrc = fs.existsSync(tagPath) ? fs.readFileSync(tagPath, 'utf8') : null;
 
-  if (!args.check && !args['dry-run']) {
-    if (readmeSrc === null) errors.push(`找不到 ${path.relative(root, readmePath)}`);
-    if (tagSrc === null) errors.push(`找不到 ${path.relative(root, tagPath)}`);
+  if (readmeSrc === null) errors.push(`找不到 ${path.relative(root, readmePath)}`);
+  if (tagSrc === null) errors.push(`找不到 ${path.relative(root, tagPath)}`);
+
+  if (errors.length > 0) {
+    err(`✗ 校验失败（${errors.length} 项）：`);
+    errors.forEach((e) => err(`  ${e}`));
+    return done(1);
   }
 
+  // 先渲染，再决定做什么 —— 这样 --check 也能比对索引是否已过期。
+  // （早先 --check 在校验完元数据后就返回了，于是「加了新题但忘了重建索引」
+  //   这个 CI 最该拦住的错误反而拿到绿灯，属于虚假通过。）
+  const readmeOut = replaceBlock(readmeSrc, renderReadmeBlock(items, categories), 'README.md', errors);
+  const tagOut = replaceBlock(tagSrc, renderTagBlock(items, tagVocab), 'INDEX-BY-TAG.md', errors);
   if (errors.length > 0) {
     err(`✗ 校验失败（${errors.length} 项）：`);
     errors.forEach((e) => err(`  ${e}`));
@@ -309,16 +319,17 @@ export function runBuildIndex(argv, opts = {}) {
   }
 
   if (args.check) {
-    out(`✓ 校验通过：${items.length} 道题，元数据与目录结构一致。`);
+    const stale = [];
+    if (readmeOut !== readmeSrc) stale.push('README.md');
+    if (tagOut !== tagSrc) stale.push('INDEX-BY-TAG.md');
+    if (stale.length > 0) {
+      err(`✗ 索引已过期：${stale.join('、')} 与题目数据不一致。`);
+      err('  通常是因为新增、修改或删除题目后忘了重建索引。');
+      err('  修复：node tools/build-index.mjs');
+      return done(1);
+    }
+    out(`✓ 校验通过：${items.length} 道题，元数据与目录结构一致，索引已是最新。`);
     return done(0);
-  }
-
-  const readmeOut = replaceBlock(readmeSrc, renderReadmeBlock(items, categories), 'README.md', errors);
-  const tagOut = replaceBlock(tagSrc, renderTagBlock(items, tagVocab), 'INDEX-BY-TAG.md', errors);
-  if (errors.length > 0) {
-    err(`✗ 校验失败（${errors.length} 项）：`);
-    errors.forEach((e) => err(`  ${e}`));
-    return done(1);
   }
 
   if (args['dry-run']) {

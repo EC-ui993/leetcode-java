@@ -63,7 +63,7 @@ git add -A && git commit -m "solve(lc-0001): 两数之和 - 哈希表一次遍�
 其他工具：
 
 ```bash
-node tools/build-index.mjs --check    # 只校验元数据，不写盘（CI / 提交前）
+node tools/build-index.mjs --check    # 校验元数据 + 检查索引是否过期；不写盘（CI / 提交前）
 node tools/check-compile.mjs          # 每个题目录单独 javac，确认代码还能编译
 node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依赖）
 ```

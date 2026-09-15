@@ -236,6 +236,7 @@ test('--check 只校验不写盘', () => {
   const root = makeFixture();
   try {
     addProblem(root, { num: 1, slug: 'two-sum' });
+    assert.equal(runBuildIndex(['--root', root]).code, 0, '先建立基线索引，否则 --check 会判为过期');
     const before = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
 
     const r = runBuildIndex(['--check', '--root', root]);
@@ -305,6 +306,69 @@ test('题目目录名不合规时报错', () => {
     const r = runBuildIndex(['--root', root]);
     assert.equal(r.code, 1);
     assert.ok(r.stderr.includes('lc-<题号>-<英文slug>'), r.stderr);
+  } finally {
+    cleanup(root);
+  }
+});
+
+test('--check 能检出「索引已过期」：加了新题但忘了重建索引', () => {
+  // 这正是 CI 要防的那个错误：推送前忘了跑 build-index，于是线上索引漏了新题。
+  // 若 --check 只校验元数据、不比对索引内容，CI 会给出**虚假的绿灯**。
+  const root = makeFixture();
+  try {
+    addProblem(root, { num: 1, slug: 'two-sum', title: '两数之和' });
+    assert.equal(runBuildIndex(['--root', root]).code, 0, '先建立基线索引');
+
+    // 新增一道题，但**不**重建索引
+    addProblem(root, {
+      num: 167,
+      slug: 'two-sum-ii',
+      title: '两数之和 II',
+      category: '02-two-pointers',
+      tags: ['双指针'],
+    });
+
+    const r = runBuildIndex(['--check', '--root', root]);
+
+    assert.equal(r.code, 1, '索引过期必须被检出，而不是放行');
+    assert.ok(r.stderr.includes('过期'), r.stderr);
+    assert.ok(r.stderr.includes('build-index'), '应告诉用户怎么修');
+  } finally {
+    cleanup(root);
+  }
+});
+
+test('--check 能检出「索引里有已删除的题」', () => {
+  const root = makeFixture();
+  try {
+    addProblem(root, { num: 1, slug: 'two-sum' });
+    assert.equal(runBuildIndex(['--root', root]).code, 0);
+
+    // 删掉题目但不重建索引
+    fs.rmSync(path.join(root, 'problems', '01-array-hash', 'lc-0001-two-sum'), {
+      recursive: true,
+      force: true,
+    });
+
+    const r = runBuildIndex(['--check', '--root', root]);
+
+    assert.equal(r.code, 1, '索引残留已删除的题必须被检出');
+  } finally {
+    cleanup(root);
+  }
+});
+
+test('--check 在索引与题目一致时通过', () => {
+  const root = makeFixture();
+  try {
+    addProblem(root, { num: 1, slug: 'two-sum' });
+    assert.equal(runBuildIndex(['--root', root]).code, 0);
+
+    const r = runBuildIndex(['--check', '--root', root]);
+
+    assert.equal(r.code, 0, r.stderr);
+    assert.ok(r.stdout.includes('校验通过'));
+    assert.ok(r.stdout.includes('索引已是最新'));
   } finally {
     cleanup(root);
   }
