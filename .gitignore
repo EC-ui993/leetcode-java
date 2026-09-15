@@ -1,0 +1,15 @@
+# Java 编译产物
+*.class
+*.jar
+target/
+out/
+build/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# 系统
+.DS_Store
+Thumbs.db
