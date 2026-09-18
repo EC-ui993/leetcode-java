@@ -18,6 +18,6 @@ class SolutionAlt {
                 }
             }
         }
-        return new int[0];
+        return new int[] { -1, 1 };
     }
 }
