@@ -24,11 +24,16 @@ date: 2026-09-15
 
 - 先想到暴力两两枚举 O(n²)，发现内层其实在问"target-x 在不在"，
   这才换成哈希表。没试排序，因为要返回原下标。
-- 只哈希一次:
-            Integer j = map.get((need));
-            if (j != null) {
-            return new int[] { j, i };
-            }
+- 另一种写法：只哈希一次（`containsKey` + `get` 会把 need 哈希两次）。
+
+  ```java
+  Integer j = map.get(need);   // 注意是 Integer 不是 int
+  if (j != null) {             // 必须判 != null，不能用 != 0 —— 下标 0 是合法值
+      return new int[] { j, i };
+  }
+  ```
+
+  实际代码里保留了 `containsKey` 版本，读起来更直白。
 
 
 ## 踩坑
