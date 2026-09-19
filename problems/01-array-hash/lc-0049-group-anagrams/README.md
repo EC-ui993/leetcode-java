@@ -1,0 +1,34 @@
+---
+id: lc-0049
+title: 字母异位词分组
+category: 01-array-hash
+tags: [哈希表, 字符串, 排序]
+difficulty: Medium
+status: 看题解完成
+url: https://leetcode.cn/problems/group-anagrams/
+date: 2026-09-18
+---
+
+# lc-0049 字母异位词分组
+
+## 思路
+
+要分组的同组词的字母排序是一样的，可以以这个为key，创建一个列表来存储同组词作为value
+
+## 复杂度
+
+- 时间：O(n*klogk) <!-- 排序长度为k的char数组需要klogk -->
+- 空间：O(n*k)
+
+## 解法演进
+
+没思路，询问AI有了大概思路做，后面经过修改得到这个解法
+
+## 踩坑
+
+当时不清楚怎么把字符串分组，后面知道遍历每个字符串，要先toCharArray()变成char类型数组，数组排序后再new String(chars)把数组转化回字符串，这样同组的字符串得到的结果就是一样的，也就是需要的key
+
+## 关联题
+
+- lc-0205（同构字符串）、lc-0890（查找和替换模式）
+

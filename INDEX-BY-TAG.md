@@ -7,13 +7,22 @@
 标签词表的完整清单与新增规则见 [`categories.yml`](categories.yml)。
 
 <!-- AUTO-GENERATED:START -->
-词表共 58 个标签，当前已使用 2 个。
+词表共 58 个标签，当前已使用 4 个。
 
 ### 数组（1）
 
 - [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) — `lc-0001` · Easy
 
-### 哈希表（1）
+### 字符串（1）
+
+- [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) — `lc-0049` · Medium
+
+### 哈希表（2）
 
 - [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) — `lc-0001` · Easy
+- [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) — `lc-0049` · Medium
+
+### 排序（1）
+
+- [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) — `lc-0049` · Medium
 <!-- AUTO-GENERATED:END -->
