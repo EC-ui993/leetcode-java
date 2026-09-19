@@ -13,16 +13,19 @@
 
 - [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) — `lc-0001` · Easy
 
-### 字符串（1）
+### 字符串（2）
 
 - [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) — `lc-0049` · Medium
+- [有效的字母异位词](problems/01-array-hash/lc-0242-valid-anagram/README.md) — `lc-0242` · Easy
 
-### 哈希表（2）
+### 哈希表（3）
 
 - [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) — `lc-0001` · Easy
 - [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) — `lc-0049` · Medium
+- [有效的字母异位词](problems/01-array-hash/lc-0242-valid-anagram/README.md) — `lc-0242` · Easy
 
-### 排序（1）
+### 排序（2）
 
 - [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) — `lc-0049` · Medium
+- [有效的字母异位词](problems/01-array-hash/lc-0242-valid-anagram/README.md) — `lc-0242` · Easy
 <!-- AUTO-GENERATED:END -->
