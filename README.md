@@ -1,41 +1,41 @@
 # leetcode-java
 
-用 Java 刷 LeetCode 的题解记录。按**用到的算法分类归档**，每题一份思路笔记。
+用 Java 刷 LeetCode 的记录。题目按**算法分类归档**，每题一份思路笔记。
 
-这个仓库的定位是「先服务自己的复习，但结构按作品集标准搭」：笔记写中文方便自己回看，
-目录与元数据用英文规范，方便检索、脚本处理与面试官阅读。
+定位：先服务自己的复习，结构上按作品集标准搭——笔记写中文方便回看，
+目录与元数据用英文规范，方便检索、脚本处理，也方便别人读懂。
 
 - 📁 题目在 [`problems/`](problems/)，按算法分类存放
 - 🔖 按标签交叉检索见 [`INDEX-BY-TAG.md`](INDEX-BY-TAG.md)
 - 🧭 分类与标签的完整清单见 [`categories.yml`](categories.yml)
 - 📐 设计文档（为什么这么组织）见 [`docs/specs/`](docs/specs/)
 
-## 这个仓库的规矩
+## 几条自我约定
 
-### 1. 只有 AC 过的代码才入库
+### 1. 只收 AC 过的代码
 
-正确性由 LeetCode 判定，仓库只记录结论——所以这里没有单元测试。
-`status` 字段如实标注可信度，它是这个仓库最不能糊弄的一项：
+正确性交给 LeetCode 判定，这里只记录结论——所以仓库里没有单元测试。
+`status` 如实标注每份代码的来源，这是整个记录里最不能含糊的一项：
 
 | `status` | 含义 |
 |---|---|
 | `独立完成` | 没看题解，自己 AC |
 | `看题解完成` | 参考题解后 AC |
-| `未通过` | 还没 AC，如实标注（**不允许为了好看改掉**） |
+| `未通过` | 还没 AC，如实标注 |
 
 ### 2. 最小可交付 = 1 题 / 15 分钟
 
-目标是坚持 300 天，不是前两周很猛。**允许提交半成品**——笔记只写了三行思路也算完成。
-但「半成品」指的是笔记单薄，**不是代码不能编译**。
+要的是坚持 300 天，不是前两周很猛。笔记只写了三行思路也算完成一道。
+但「半成品」只指笔记单薄——**代码必须能编译**。
 
-忙的时候，只填「思路」一节就够了，周末再集中补厚。
+忙的时候只填「思路」一节，周末再集中补厚。
 
 ### 3. 笔记比代码重要
 
-半年后你能看懂代码，但看不懂当时为什么这么想。所以模板里有「解法演进」和「踩坑」两节，
-那才是这个仓库的复利来源。
+代码半年后还看得懂，但「当时为什么这么想」会忘干净。
+所以笔记里有「解法演进」和「踩坑」两节——它们才是这个仓库真正攒下来的东西。
 
-## 怎么新增一道题
+## 新增一道题
 
 ```bash
 node tools/new-problem.mjs --id 1 --title "两数之和" --slug two-sum \
@@ -43,8 +43,8 @@ node tools/new-problem.mjs --id 1 --title "两数之和" --slug two-sum \
 ```
 
 - `--title` 是**中文题名**（写进笔记），`--slug` 是 LeetCode URL 里的英文 slug（决定目录名）
-- `--cat` 可从 [`categories.yml`](categories.yml) 查；`--tags` 必须是标签词表内的
-- 不确定参数时加 `--dry-run` 先看看会建什么
+- `--cat` 从 [`categories.yml`](categories.yml) 里选；`--tags` 必须是词表内的标签
+- 拿不准参数就先加 `--dry-run` 空跑一遍
 
 然后：
 
@@ -68,11 +68,11 @@ node tools/check-compile.mjs          # 每个题目录单独 javac，确认代�
 node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依赖）
 ```
 
-> ⚠️ 测试命令**不要**写成 `node --test tools/tests/`：Node 会把目录当成模块去 import，
-> 报 `ERR_UNSUPPORTED_DIR_IMPORT`。必须给 glob 模式（或显式文件列表）。
+两个记过一次的坑：
 
-> 小提示：如果要把输出重定向到文件，Windows 上先执行 `chcp 65001` 切到 UTF-8，
-> 否则中文可能显示为乱码。
+- 测试命令不能用目录形式 `node --test tools/tests/`——Node 会把目录当模块 import，
+  报 `ERR_UNSUPPORTED_DIR_IMPORT`，必须给 glob 模式
+- 输出重定向到文件时先 `chcp 65001`，否则中文按 GBK 解读会变乱码
 
 ## 踩过的坑（Windows）
 
@@ -85,11 +85,13 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 | `node --test tools/tests/` 失败 | Node 把目录当模块 `import` | 用 `node --test "tools/tests/*.test.mjs"` |
 | `Get-Content xxx.md` 显示成乱码 | PowerShell 5.1 的 `Get-Content` 默认按 ANSI 解读 UTF-8 文件 | 文件没坏。要用 `[System.IO.File]::ReadAllText($p, [Text.Encoding]::UTF8)` 才准 |
 | git 提示 `LF will be replaced by CRLF` | Windows 换行符 | 已由 `.gitattributes` 统一为 LF |
+| VS Code 报 `Solution.java is a non-project file` | 每个 `Solution.java` 都是独立可提交的单元，仓库刻意不是 Java 工程 | 正常现象，忽略即可 |
+| javac 报 `duplicate class: Solution` | 同一题目录下两个文件都声明了 `class Solution` | 备选解的类名改成 `SolutionAlt` |
 
-## 贡献
+## 关于
 
-这是个人刷题记录，所以是 MIT 许可、欢迎参考，但一般不接受 PR。
-发现笔记里有错的地方，欢迎开 issue 告诉我。
+个人刷题记录，MIT 许可。欢迎参考，但一般不接受 PR。
+笔记里有错的地方，欢迎开 issue。
 
 <!-- AUTO-GENERATED:START -->
 ## 进度
