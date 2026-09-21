@@ -1,0 +1,136 @@
+# ============================================================================
+# 力扣热题 HOT 100
+#
+# 来源：https://leetcode.cn/studyplan/top-100-liked/
+#
+# 本文件是「哪些题属于 Hot 100」的【唯一真相源】。
+#
+# 题目的归属由【题号】推导，不需要在题目的 front-matter 里手动标注：
+#   - 手动标注会漏、会写错（曾经把不在题单里的题标成了 Hot100）
+#   - 由题号推导则不会不一致 —— 这里写错了，脚本立刻能查出来
+#
+# 顺序沿用官方题单的分组与顺序，照着往下刷即可。
+# ============================================================================
+
+id: hot100
+name: 力扣热题 HOT 100
+url: https://leetcode.cn/studyplan/top-100-liked/
+
+problems:
+  # ── 哈希 ──
+  - { num: 1,    title: 两数之和,                              difficulty: Easy }
+  - { num: 49,   title: 字母异位词分组,                        difficulty: Medium }
+  - { num: 128,  title: 最长连续序列,                          difficulty: Medium }
+  # ── 双指针 ──
+  - { num: 283,  title: 移动零,                                difficulty: Easy }
+  - { num: 11,   title: 盛最多水的容器,                        difficulty: Medium }
+  - { num: 15,   title: 三数之和,                              difficulty: Medium }
+  - { num: 42,   title: 接雨水,                                difficulty: Hard }
+  # ── 滑动窗口 ──
+  - { num: 3,    title: 无重复字符的最长子串,                  difficulty: Medium }
+  - { num: 438,  title: 找到字符串中所有字母异位词,            difficulty: Medium }
+  # ── 子串 ──
+  - { num: 560,  title: 和为 K 的子数组,                       difficulty: Medium }
+  - { num: 239,  title: 滑动窗口最大值,                        difficulty: Hard }
+  - { num: 76,   title: 最小覆盖子串,                          difficulty: Hard }
+  # ── 普通数组 ──
+  - { num: 53,   title: 最大子数组和,                          difficulty: Medium }
+  - { num: 56,   title: 合并区间,                              difficulty: Medium }
+  - { num: 189,  title: 轮转数组,                              difficulty: Medium }
+  - { num: 238,  title: 除了自身以外数组的乘积,                difficulty: Medium }
+  - { num: 41,   title: 缺失的第一个正数,                      difficulty: Hard }
+  # ── 矩阵 ──
+  - { num: 73,   title: 矩阵置零,                              difficulty: Medium }
+  - { num: 54,   title: 螺旋矩阵,                              difficulty: Medium }
+  - { num: 48,   title: 旋转图像,                              difficulty: Medium }
+  - { num: 240,  title: 搜索二维矩阵 II,                       difficulty: Medium }
+  # ── 链表 ──
+  - { num: 160,  title: 相交链表,                              difficulty: Easy }
+  - { num: 206,  title: 反转链表,                              difficulty: Easy }
+  - { num: 234,  title: 回文链表,                              difficulty: Easy }
+  - { num: 141,  title: 环形链表,                              difficulty: Easy }
+  - { num: 142,  title: 环形链表 II,                           difficulty: Medium }
+  - { num: 21,   title: 合并两个有序链表,                      difficulty: Easy }
+  - { num: 2,    title: 两数相加,                              difficulty: Medium }
+  - { num: 19,   title: 删除链表的倒数第 N 个结点,             difficulty: Medium }
+  - { num: 24,   title: 两两交换链表中的节点,                  difficulty: Medium }
+  - { num: 25,   title: K 个一组翻转链表,                      difficulty: Hard }
+  - { num: 138,  title: 随机链表的复制,                        difficulty: Medium }
+  - { num: 148,  title: 排序链表,                              difficulty: Medium }
+  - { num: 23,   title: 合并 K 个升序链表,                     difficulty: Hard }
+  - { num: 146,  title: LRU 缓存,                              difficulty: Medium }
+  # ── 二叉树 ──
+  - { num: 94,   title: 二叉树的中序遍历,                      difficulty: Easy }
+  - { num: 104,  title: 二叉树的最大深度,                      difficulty: Easy }
+  - { num: 226,  title: 翻转二叉树,                            difficulty: Easy }
+  - { num: 101,  title: 对称二叉树,                            difficulty: Easy }
+  - { num: 543,  title: 二叉树的直径,                          difficulty: Easy }
+  - { num: 102,  title: 二叉树的层序遍历,                      difficulty: Medium }
+  - { num: 108,  title: 将有序数组转换为二叉搜索树,            difficulty: Easy }
+  - { num: 98,   title: 验证二叉搜索树,                        difficulty: Medium }
+  - { num: 230,  title: 二叉搜索树中第 K 小的元素,             difficulty: Medium }
+  - { num: 199,  title: 二叉树的右视图,                        difficulty: Medium }
+  - { num: 114,  title: 二叉树展开为链表,                      difficulty: Medium }
+  - { num: 105,  title: 从前序与中序遍历序列构造二叉树,        difficulty: Medium }
+  - { num: 437,  title: 路径总和 III,                          difficulty: Medium }
+  - { num: 236,  title: 二叉树的最近公共祖先,                  difficulty: Medium }
+  - { num: 124,  title: 二叉树中的最大路径和,                  difficulty: Hard }
+  # ── 图论 ──
+  - { num: 200,  title: 岛屿数量,                              difficulty: Medium }
+  - { num: 994,  title: 腐烂的橘子,                            difficulty: Medium }
+  - { num: 207,  title: 课程表,                                difficulty: Medium }
+  - { num: 208,  title: 实现 Trie (前缀树),                    difficulty: Medium }
+  # ── 回溯 ──
+  - { num: 46,   title: 全排列,                                difficulty: Medium }
+  - { num: 78,   title: 子集,                                  difficulty: Medium }
+  - { num: 17,   title: 电话号码的字母组合,                    difficulty: Medium }
+  - { num: 39,   title: 组合总和,                              difficulty: Medium }
+  - { num: 22,   title: 括号生成,                              difficulty: Medium }
+  - { num: 79,   title: 单词搜索,                              difficulty: Medium }
+  - { num: 131,  title: 分割回文串,                            difficulty: Medium }
+  - { num: 51,   title: N 皇后,                                difficulty: Hard }
+  # ── 二分查找 ──
+  - { num: 35,   title: 搜索插入位置,                          difficulty: Easy }
+  - { num: 74,   title: 搜索二维矩阵,                          difficulty: Medium }
+  - { num: 34,   title: 在排序数组中查找元素的第一个和最后一个位置, difficulty: Medium }
+  - { num: 33,   title: 搜索旋转排序数组,                      difficulty: Medium }
+  - { num: 153,  title: 寻找旋转排序数组中的最小值,            difficulty: Medium }
+  - { num: 4,    title: 寻找两个正序数组的中位数,              difficulty: Hard }
+  # ── 栈 ──
+  - { num: 20,   title: 有效的括号,                            difficulty: Easy }
+  - { num: 155,  title: 最小栈,                                difficulty: Medium }
+  - { num: 394,  title: 字符串解码,                            difficulty: Medium }
+  - { num: 739,  title: 每日温度,                              difficulty: Medium }
+  - { num: 84,   title: 柱状图中最大的矩形,                    difficulty: Hard }
+  # ── 堆 ──
+  - { num: 215,  title: 数组中的第K个最大元素,                 difficulty: Medium }
+  - { num: 347,  title: 前 K 个高频元素,                       difficulty: Medium }
+  - { num: 295,  title: 数据流的中位数,                        difficulty: Hard }
+  # ── 贪心算法 ──
+  - { num: 121,  title: 买卖股票的最佳时机,                    difficulty: Easy }
+  - { num: 55,   title: 跳跃游戏,                              difficulty: Medium }
+  - { num: 45,   title: 跳跃游戏 II,                           difficulty: Medium }
+  - { num: 763,  title: 划分字母区间,                          difficulty: Medium }
+  # ── 动态规划 ──
+  - { num: 70,   title: 爬楼梯,                                difficulty: Easy }
+  - { num: 118,  title: 杨辉三角,                              difficulty: Easy }
+  - { num: 198,  title: 打家劫舍,                              difficulty: Medium }
+  - { num: 279,  title: 完全平方数,                            difficulty: Medium }
+  - { num: 322,  title: 零钱兑换,                              difficulty: Medium }
+  - { num: 139,  title: 单词拆分,                              difficulty: Medium }
+  - { num: 300,  title: 最长递增子序列,                        difficulty: Medium }
+  - { num: 152,  title: 乘积最大子数组,                        difficulty: Medium }
+  - { num: 416,  title: 分割等和子集,                          difficulty: Medium }
+  - { num: 32,   title: 最长有效括号,                          difficulty: Hard }
+  # ── 多维动态规划 ──
+  - { num: 62,   title: 不同路径,                              difficulty: Medium }
+  - { num: 64,   title: 最小路径和,                            difficulty: Medium }
+  - { num: 5,    title: 最长回文子串,                          difficulty: Medium }
+  - { num: 1143, title: 最长公共子序列,                        difficulty: Medium }
+  - { num: 72,   title: 编辑距离,                              difficulty: Medium }
+  # ── 技巧 ──
+  - { num: 136,  title: 只出现一次的数字,                      difficulty: Easy }
+  - { num: 169,  title: 多数元素,                              difficulty: Easy }
+  - { num: 75,   title: 颜色分类,                              difficulty: Medium }
+  - { num: 31,   title: 下一个排列,                            difficulty: Medium }
+  - { num: 287,  title: 寻找重复数,                            difficulty: Medium }

@@ -8,6 +8,7 @@
 - 📁 题目在 [`problems/`](problems/)，按算法分类存放
 - 🔖 按标签交叉检索见 [`INDEX-BY-TAG.md`](INDEX-BY-TAG.md)
 - 🧭 分类与标签的完整清单见 [`categories.yml`](categories.yml)
+- 🎯 题单清单（Hot 100 等）见 [`lists/`](lists/)
 - 📐 设计文档（为什么这么组织）见 [`docs/specs/`](docs/specs/)
 
 ## 几条自我约定
@@ -96,14 +97,135 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 <!-- AUTO-GENERATED:START -->
 ## 进度
 
-**共 4 题** ｜ Easy 2 · Medium 2 · Hard 0 ｜ 最近 AC：2026-09-21
+**已完成 4 题** ｜ 未开始 1 题 ｜ Easy 2 · Medium 2 · Hard 0 ｜ 最近 AC：2026-09-21
+
+进行中：`lc-0283` 移动零
+
+## 力扣热题 HOT 100 进度
+
+**2 / 100**（2%）
+
+### 已完成（2）
+
+| 题号 | 题名 | 难度 | 状态 |
+|---|---|---|---|
+| 0001 | [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) | Easy | 独立完成 |
+| 0049 | [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) | Medium | 看题解完成 |
+
+<details>
+<summary>全部 100 道清单</summary>
+
+| 题号 | 题名 | 难度 | 笔记 |
+|---|---|---|---|
+| 0001 | 两数之和 | Easy | [✅ 已做](problems/01-array-hash/lc-0001-two-sum/README.md) |
+| 0049 | 字母异位词分组 | Medium | [✅ 已做](problems/01-array-hash/lc-0049-group-anagrams/README.md) |
+| 0128 | 最长连续序列 | Medium |  |
+| 0283 | 移动零 | Easy |  |
+| 0011 | 盛最多水的容器 | Medium |  |
+| 0015 | 三数之和 | Medium |  |
+| 0042 | 接雨水 | Hard |  |
+| 0003 | 无重复字符的最长子串 | Medium |  |
+| 0438 | 找到字符串中所有字母异位词 | Medium |  |
+| 0560 | 和为 K 的子数组 | Medium |  |
+| 0239 | 滑动窗口最大值 | Hard |  |
+| 0076 | 最小覆盖子串 | Hard |  |
+| 0053 | 最大子数组和 | Medium |  |
+| 0056 | 合并区间 | Medium |  |
+| 0189 | 轮转数组 | Medium |  |
+| 0238 | 除了自身以外数组的乘积 | Medium |  |
+| 0041 | 缺失的第一个正数 | Hard |  |
+| 0073 | 矩阵置零 | Medium |  |
+| 0054 | 螺旋矩阵 | Medium |  |
+| 0048 | 旋转图像 | Medium |  |
+| 0240 | 搜索二维矩阵 II | Medium |  |
+| 0160 | 相交链表 | Easy |  |
+| 0206 | 反转链表 | Easy |  |
+| 0234 | 回文链表 | Easy |  |
+| 0141 | 环形链表 | Easy |  |
+| 0142 | 环形链表 II | Medium |  |
+| 0021 | 合并两个有序链表 | Easy |  |
+| 0002 | 两数相加 | Medium |  |
+| 0019 | 删除链表的倒数第 N 个结点 | Medium |  |
+| 0024 | 两两交换链表中的节点 | Medium |  |
+| 0025 | K 个一组翻转链表 | Hard |  |
+| 0138 | 随机链表的复制 | Medium |  |
+| 0148 | 排序链表 | Medium |  |
+| 0023 | 合并 K 个升序链表 | Hard |  |
+| 0146 | LRU 缓存 | Medium |  |
+| 0094 | 二叉树的中序遍历 | Easy |  |
+| 0104 | 二叉树的最大深度 | Easy |  |
+| 0226 | 翻转二叉树 | Easy |  |
+| 0101 | 对称二叉树 | Easy |  |
+| 0543 | 二叉树的直径 | Easy |  |
+| 0102 | 二叉树的层序遍历 | Medium |  |
+| 0108 | 将有序数组转换为二叉搜索树 | Easy |  |
+| 0098 | 验证二叉搜索树 | Medium |  |
+| 0230 | 二叉搜索树中第 K 小的元素 | Medium |  |
+| 0199 | 二叉树的右视图 | Medium |  |
+| 0114 | 二叉树展开为链表 | Medium |  |
+| 0105 | 从前序与中序遍历序列构造二叉树 | Medium |  |
+| 0437 | 路径总和 III | Medium |  |
+| 0236 | 二叉树的最近公共祖先 | Medium |  |
+| 0124 | 二叉树中的最大路径和 | Hard |  |
+| 0200 | 岛屿数量 | Medium |  |
+| 0994 | 腐烂的橘子 | Medium |  |
+| 0207 | 课程表 | Medium |  |
+| 0208 | 实现 Trie (前缀树) | Medium |  |
+| 0046 | 全排列 | Medium |  |
+| 0078 | 子集 | Medium |  |
+| 0017 | 电话号码的字母组合 | Medium |  |
+| 0039 | 组合总和 | Medium |  |
+| 0022 | 括号生成 | Medium |  |
+| 0079 | 单词搜索 | Medium |  |
+| 0131 | 分割回文串 | Medium |  |
+| 0051 | N 皇后 | Hard |  |
+| 0035 | 搜索插入位置 | Easy |  |
+| 0074 | 搜索二维矩阵 | Medium |  |
+| 0034 | 在排序数组中查找元素的第一个和最后一个位置 | Medium |  |
+| 0033 | 搜索旋转排序数组 | Medium |  |
+| 0153 | 寻找旋转排序数组中的最小值 | Medium |  |
+| 0004 | 寻找两个正序数组的中位数 | Hard |  |
+| 0020 | 有效的括号 | Easy |  |
+| 0155 | 最小栈 | Medium |  |
+| 0394 | 字符串解码 | Medium |  |
+| 0739 | 每日温度 | Medium |  |
+| 0084 | 柱状图中最大的矩形 | Hard |  |
+| 0215 | 数组中的第K个最大元素 | Medium |  |
+| 0347 | 前 K 个高频元素 | Medium |  |
+| 0295 | 数据流的中位数 | Hard |  |
+| 0121 | 买卖股票的最佳时机 | Easy |  |
+| 0055 | 跳跃游戏 | Medium |  |
+| 0045 | 跳跃游戏 II | Medium |  |
+| 0763 | 划分字母区间 | Medium |  |
+| 0070 | 爬楼梯 | Easy |  |
+| 0118 | 杨辉三角 | Easy |  |
+| 0198 | 打家劫舍 | Medium |  |
+| 0279 | 完全平方数 | Medium |  |
+| 0322 | 零钱兑换 | Medium |  |
+| 0139 | 单词拆分 | Medium |  |
+| 0300 | 最长递增子序列 | Medium |  |
+| 0152 | 乘积最大子数组 | Medium |  |
+| 0416 | 分割等和子集 | Medium |  |
+| 0032 | 最长有效括号 | Hard |  |
+| 0062 | 不同路径 | Medium |  |
+| 0064 | 最小路径和 | Medium |  |
+| 0005 | 最长回文子串 | Medium |  |
+| 1143 | 最长公共子序列 | Medium |  |
+| 0072 | 编辑距离 | Medium |  |
+| 0136 | 只出现一次的数字 | Easy |  |
+| 0169 | 多数元素 | Easy |  |
+| 0075 | 颜色分类 | Medium |  |
+| 0031 | 下一个排列 | Medium |  |
+| 0287 | 寻找重复数 | Medium |  |
+
+</details>
 
 ## 分类总览
 
 | 分类 | 题数 | 分类 | 题数 |
 |---|---:|---|---:|
 | 数组与哈希表 (`01-array-hash`) | 3 | 动态规划 (`10-dynamic-programming`) | 0 |
-| 双指针 (`02-two-pointers`) | 1 | 贪心 (`11-greedy`) | 0 |
+| 双指针 (`02-two-pointers`) | 2 | 贪心 (`11-greedy`) | 0 |
 | 滑动窗口 (`03-sliding-window`) | 0 | 堆与优先队列 (`12-heap`) | 0 |
 | 二分查找 (`04-binary-search`) | 0 | 字典树 (`13-trie`) | 0 |
 | 栈与队列 (`05-stack-queue`) | 0 | 并查集 (`14-union-find`) | 0 |
@@ -118,13 +240,14 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 
 | 题号 | 题名 | 难度 | 标签 | 状态 | 日期 |
 |---|---|---|---|---|---|
-| 0001 | [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) | Easy | 数组、哈希表、Hot100 | 独立完成 | 2026-09-15 |
-| 0049 | [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) | Medium | 哈希表、字符串、排序、Hot100 | 看题解完成 | 2026-09-18 |
+| 0001 | [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) | Easy | 数组、哈希表 | 独立完成 | 2026-09-15 |
+| 0049 | [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) | Medium | 哈希表、字符串、排序 | 看题解完成 | 2026-09-18 |
 | 0242 | [有效的字母异位词](problems/01-array-hash/lc-0242-valid-anagram/README.md) | Easy | 哈希表、字符串、排序 | 看题解完成 | 2026-09-19 |
 
-### 双指针（1）
+### 双指针（2）
 
 | 题号 | 题名 | 难度 | 标签 | 状态 | 日期 |
 |---|---|---|---|---|---|
 | 0167 | [两数之和 II - 输入有序数组](problems/02-two-pointers/lc-0167-two-sum-ii-input-array-is-sorted/README.md) | Medium | 双指针、数组 | 独立完成 | 2026-09-21 |
+| 0283 | [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) | Easy | 双指针、数组、快慢指针 | 未开始 | 2026-09-21 |
 <!-- AUTO-GENERATED:END -->

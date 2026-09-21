@@ -28,7 +28,9 @@ schema:
   category    必填  categories.yml 中的合法 id，且必须与所在目录一致
   tags        必填  至少 1 个，必须在 categories.yml 的标签词表内
   difficulty  必填  Easy / Medium / Hard
-  status      必填  独立完成 / 看题解完成 / 未通过
+  status      必填  未开始 / 独立完成 / 看题解完成 / 未通过
+                    脚手架默认写「未开始」——它绝不替你宣称已完成，
+                    做完后再自己改成实际状态。未开始的题不计入任何进度。
   url         必填  LeetCode 链接（用它替代题面，见下方版权说明）
   date        必填  该次 AC 的日期 YYYY-MM-DD
 

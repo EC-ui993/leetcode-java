@@ -86,7 +86,7 @@ test('正常题目：标记区含该题，且题名渲染为相对链接', () =>
       readme.includes('[两数之和](problems/01-array-hash/lc-0001-two-sum/README.md)'),
       '题名必须是可点击的相对链接',
     );
-    assert.ok(readme.includes('**共 1 题**'));
+    assert.ok(readme.includes('**已完成 1 题**'));
     assert.ok(readme.includes('数组与哈希表（1）'));
     // 手写区仍在
     assert.ok(readme.startsWith(HAND_WRITTEN));
@@ -151,13 +151,13 @@ test('标签不在词表内时报错', () => {
   }
 });
 
-test('非法 status（使用已废弃的「未开始」）时报错', () => {
+test('非法 status 时报错', () => {
   const root = makeFixture();
   try {
-    addProblem(root, { num: 1, slug: 'two-sum', status: '未开始' });
+    addProblem(root, { num: 1, slug: 'two-sum', status: '做完了' });
     const r = runBuildIndex(['--root', root]);
     assert.equal(r.code, 1);
-    assert.ok(r.stderr.includes('未开始'), r.stderr);
+    assert.ok(r.stderr.includes('做完了'), r.stderr);
   } finally {
     cleanup(root);
   }
@@ -369,6 +369,141 @@ test('--check 在索引与题目一致时通过', () => {
     assert.equal(r.code, 0, r.stderr);
     assert.ok(r.stdout.includes('校验通过'));
     assert.ok(r.stdout.includes('索引已是最新'));
+  } finally {
+    cleanup(root);
+  }
+});
+
+/** 在 fixture 里放一份题单清单。 */
+function addList(root, id, name, problems) {
+  const dir = path.join(root, 'lists');
+  fs.mkdirSync(dir, { recursive: true });
+  const body = problems
+    .map((p) => `  - { num: ${p.num}, title: ${p.title}, difficulty: ${p.difficulty} }`)
+    .join('\n');
+  fs.writeFileSync(
+    path.join(dir, `${id}.yml`),
+    `id: ${id}\nname: ${name}\nurl: https://example.com/${id}\n\nproblems:\n${body}\n`,
+    'utf8',
+  );
+}
+
+test('题单进度区：显示 N/M、已做题目带链接、未做在折叠清单里', () => {
+  const root = makeFixture();
+  try {
+    addProblem(root, { num: 1, slug: 'two-sum', title: '两数之和' });
+    addProblem(root, { num: 999, slug: 'not-in-list', title: '不在题单里' });
+    addList(root, 'demo', '示例题单', [
+      { num: 1, title: '两数之和', difficulty: 'Easy' },
+      { num: 49, title: '字母异位词分组', difficulty: 'Medium' },
+      { num: 128, title: '最长连续序列', difficulty: 'Medium' },
+    ]);
+
+    const r = runBuildIndex(['--root', root]);
+    assert.equal(r.code, 0, r.stderr);
+
+    const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+
+    assert.ok(readme.includes('## 示例题单 进度'), '应有题单进度区');
+    assert.ok(readme.includes('**1 / 3**（33%）'), '进度应按题号推导');
+
+    // 已做的题在“已完成”表里带笔记链接
+    assert.ok(
+      readme.includes('[两数之和](problems/01-array-hash/lc-0001-two-sum/README.md)'),
+      '已做题目应链接到笔记',
+    );
+
+    // 完整清单折叠显示，未做的题只有题名
+    assert.ok(readme.includes('<details>'), '完整清单应折叠');
+    assert.ok(readme.includes('<summary>全部 3 道清单</summary>'));
+    assert.ok(readme.includes('| 0049 | 字母异位词分组 | Medium |  |'), '未做题不带链接');
+  } finally {
+    cleanup(root);
+  }
+});
+
+test('题单归属由题号推导：不在清单里的题不计入进度', () => {
+  const root = makeFixture();
+  try {
+    addProblem(root, { num: 999, slug: 'not-in-list' });
+    addList(root, 'demo', '示例题单', [
+      { num: 1, title: '两数之和', difficulty: 'Easy' },
+    ]);
+
+    const r = runBuildIndex(['--root', root]);
+    assert.equal(r.code, 0, r.stderr);
+
+    const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+    assert.ok(readme.includes('**0 / 1**（0%）'), '不在清单里的题不应计入进度');
+    assert.ok(!readme.includes('### 已完成'), '没有完成的题时不渲染已完成表');
+  } finally {
+    cleanup(root);
+  }
+});
+
+test('没有 lists 目录时不渲染题单进度区', () => {
+  const root = makeFixture();
+  try {
+    addProblem(root, { num: 1, slug: 'two-sum' });
+
+    const r = runBuildIndex(['--root', root]);
+    assert.equal(r.code, 0, r.stderr);
+
+    const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+    assert.ok(!readme.includes('进度（'), '没有题单就不该出现题单区');
+    assert.ok(readme.includes('## 分类总览'), '常规索引仍应照常生成');
+  } finally {
+    cleanup(root);
+  }
+});
+
+test('题单文件有误时报错退出', () => {
+  const root = makeFixture();
+  try {
+    addProblem(root, { num: 1, slug: 'two-sum' });
+    const dir = path.join(root, 'lists');
+    fs.mkdirSync(dir, { recursive: true });
+    // 故意漏掉 name
+    fs.writeFileSync(
+      path.join(dir, 'bad.yml'),
+      'id: bad\nproblems:\n  - { num: 1, title: 甲, difficulty: Easy }\n',
+      'utf8',
+    );
+
+    const r = runBuildIndex(['--root', root]);
+
+    assert.equal(r.code, 1);
+    assert.ok(r.stderr.includes('lists/'), r.stderr);
+    assert.ok(r.stderr.includes('缺少 name'), r.stderr);
+  } finally {
+    cleanup(root);
+  }
+});
+
+test('「未开始」的题不计入进度，也不计入题单统计', () => {
+  // 脚手架刚建好的目录是「未开始」。它绝不能算作已完成，
+  // 否则一建目录进度就 +1，数字撒谎。
+  const root = makeFixture();
+  try {
+    addProblem(root, { num: 1, slug: 'two-sum', title: '两数之和', status: '独立完成' });
+    addProblem(root, { num: 283, slug: 'move-zeroes', title: '移动零', status: '未开始' });
+    addList(root, 'demo', '示例题单', [
+      { num: 1, title: '两数之和', difficulty: 'Easy' },
+      { num: 283, title: '移动零', difficulty: 'Easy' },
+    ]);
+
+    const r = runBuildIndex(['--root', root]);
+    assert.equal(r.code, 0, r.stderr);
+
+    const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+
+    assert.ok(readme.includes('**已完成 1 题**'), '已完成只算真正做完的');
+    assert.ok(readme.includes('未开始 1 题'));
+    assert.ok(readme.includes('进行中：`lc-0283` 移动零'), '应把进行中的题单列出来');
+    assert.ok(readme.includes('**1 / 2**（50%）'), '题单进度也要排除未开始的题');
+
+    // 但题目仍然出现在索引里（文件确实存在），状态如实显示
+    assert.ok(readme.includes('| 未开始 |'), '进行中的题仍应出现在题目索引');
   } finally {
     cleanup(root);
   }

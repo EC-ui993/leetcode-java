@@ -16,12 +16,15 @@ import { repoRoot, listProblemDirs, parseProblemDirName } from './lib/paths.mjs'
 import { loadCategories } from './lib/categories.mjs';
 import { parseFrontmatter } from './lib/frontmatter.mjs';
 import { padNum } from './lib/util.mjs';
+import { loadLists, listProgress } from './lib/lists.mjs';
 
 const START = '<!-- AUTO-GENERATED:START -->';
 const END = '<!-- AUTO-GENERATED:END -->';
 
 const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
-const STATUSES = ['独立完成', '看题解完成', '未通过'];
+const STATUSES = ['未开始', '独立完成', '看题解完成', '未通过'];
+/** 这个状态表示「目录已建但题还没做完」，不计入任何进度。 */
+const STATUS_PENDING = '未开始';
 const REQUIRED_FIELDS = ['id', 'title', 'category', 'tags', 'difficulty', 'status', 'url', 'date'];
 
 const USAGE = `用法：
@@ -146,12 +149,60 @@ function collectProblems(root, categories, tagVocab) {
  * 从而破坏幂等性（每次跑都产生无意义的 git diff）。
  * 「最近 AC」取的是题目数据本身的最大日期，是稳定值。
  */
-function renderReadmeBlock(items, categories) {
-  const lines = [];
-  const byDifficulty = Object.fromEntries(DIFFICULTIES.map((d) => [d, 0]));
-  for (const it of items) byDifficulty[it.data.difficulty]++;
+/**
+ * 渲染一个题单的进度区：顶部是进度与「已完成」表，下面折叠着完整清单。
+ * 归属由题号推导（见 tools/lib/lists.mjs），题目本身不需要标注任何标签。
+ */
+function renderListBlock(items, list) {
+  const progress = listProgress(list, items);
+  const byNum = new Map(items.map((it) => [it.num, it]));
 
-  const dates = items.map((it) => it.data.date).sort();
+  const lines = [];
+  lines.push(`## ${list.name} 进度`);
+  lines.push('');
+  lines.push(`**${progress.done.length} / ${progress.total}**（${progress.percent}%）`);
+  lines.push('');
+
+  if (progress.done.length > 0) {
+    lines.push(`### 已完成（${progress.done.length}）`);
+    lines.push('');
+    lines.push('| 题号 | 题名 | 难度 | 状态 |');
+    lines.push('|---|---|---|---|');
+    for (const p of progress.done) {
+      const it = byNum.get(p.num);
+      lines.push(
+        `| ${padNum(p.num)} | [${p.title}](${it.relDir}/README.md) | ${p.difficulty} | ${it.data.status} |`,
+      );
+    }
+    lines.push('');
+  }
+
+  lines.push('<details>');
+  lines.push(`<summary>全部 ${progress.total} 道清单</summary>`);
+  lines.push('');
+  lines.push('| 题号 | 题名 | 难度 | 笔记 |');
+  lines.push('|---|---|---|---|');
+  for (const p of list.problems) {
+    const it = byNum.get(p.num);
+    const note = it ? `[✅ 已做](${it.relDir}/README.md)` : '';
+    lines.push(`| ${padNum(p.num)} | ${p.title} | ${p.difficulty} | ${note} |`);
+  }
+  lines.push('');
+  lines.push('</details>');
+
+  return lines.join('\n');
+}
+
+function renderReadmeBlock(items, categories, lists) {
+  const lines = [];
+  // 「未开始」的题目录已建但尚未做完，不计入进度与题单统计
+  const doneItems = items.filter((it) => it.data.status !== STATUS_PENDING);
+  const pendingItems = items.filter((it) => it.data.status === STATUS_PENDING);
+
+  const byDifficulty = Object.fromEntries(DIFFICULTIES.map((d) => [d, 0]));
+  for (const it of doneItems) byDifficulty[it.data.difficulty]++;
+
+  const dates = doneItems.map((it) => it.data.date).sort();
 
   lines.push('## 进度');
   lines.push('');
@@ -163,11 +214,27 @@ function renderReadmeBlock(items, categories) {
     lines.push('    --cat 01-array-hash --tags 数组,哈希表 --difficulty Easy');
     lines.push('```');
   } else {
-    lines.push(`**共 ${items.length} 题** ｜ ` +
-      `Easy ${byDifficulty.Easy} · Medium ${byDifficulty.Medium} · Hard ${byDifficulty.Hard}` +
-      ` ｜ 最近 AC：${dates[dates.length - 1]}`);
+    const parts = [`**已完成 ${doneItems.length} 题**`];
+    if (pendingItems.length > 0) parts.push(`未开始 ${pendingItems.length} 题`);
+    parts.push(
+      `Easy ${byDifficulty.Easy} · Medium ${byDifficulty.Medium} · Hard ${byDifficulty.Hard}`,
+    );
+    if (dates.length > 0) parts.push(`最近 AC：${dates[dates.length - 1]}`);
+    lines.push(parts.join(' ｜ '));
+
+    if (pendingItems.length > 0) {
+      lines.push('');
+      lines.push(
+        `进行中：${pendingItems.map((it) => `\`${it.data.id}\` ${it.data.title}`).join('、')}`,
+      );
+    }
   }
   lines.push('');
+
+  for (const list of lists) {
+    lines.push(renderListBlock(doneItems, list));
+    lines.push('');
+  }
 
   const counts = new Map(categories.map((c) => [c.id, 0]));
   for (const it of items) counts.set(it.category, (counts.get(it.category) ?? 0) + 1);
@@ -290,6 +357,13 @@ export function runBuildIndex(argv, opts = {}) {
     return done(1);
   }
 
+  const { lists, errors: listErrors } = loadLists(root);
+  if (listErrors.length > 0) {
+    err('✗ lists/ 有误：');
+    listErrors.forEach((e) => err(`  ${e}`));
+    return done(1);
+  }
+
   const { items, errors } = collectProblems(root, categories, tagVocab);
 
   const readmePath = path.join(root, 'README.md');
@@ -310,7 +384,12 @@ export function runBuildIndex(argv, opts = {}) {
   // 先渲染，再决定做什么 —— 这样 --check 也能比对索引是否已过期。
   // （早先 --check 在校验完元数据后就返回了，于是「加了新题但忘了重建索引」
   //   这个 CI 最该拦住的错误反而拿到绿灯，属于虚假通过。）
-  const readmeOut = replaceBlock(readmeSrc, renderReadmeBlock(items, categories), 'README.md', errors);
+  const readmeOut = replaceBlock(
+    readmeSrc,
+    renderReadmeBlock(items, categories, lists),
+    'README.md',
+    errors,
+  );
   const tagOut = replaceBlock(tagSrc, renderTagBlock(items, tagVocab), 'INDEX-BY-TAG.md', errors);
   if (errors.length > 0) {
     err(`✗ 校验失败（${errors.length} 项）：`);

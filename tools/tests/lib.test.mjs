@@ -83,16 +83,16 @@ test('parseCategories 检出段落之外的条目', () => {
   assert.ok(errors.some((e) => e.includes('段落之外')));
 });
 
-test('真实 categories.yml：18 个分类、59 个标签、均无重复', () => {
+test('真实 categories.yml：18 个分类、58 个标签、均无重复', () => {
   // 这两个数字是硬编码的，改 categories.yml 时必须同步更新。
   // 硬编码是有意的：它能抓出「不小心删掉某个分类/标签」这类静默破坏。
   const { categories, tags, errors } = loadCategories(repoRoot());
 
   assert.deepEqual(errors, []);
   assert.equal(categories.length, 18);
-  assert.equal(tags.length, 59);
+  assert.equal(tags.length, 58);
   assert.equal(new Set(categories.map((c) => c.id)).size, 18);
-  assert.equal(new Set(tags).size, 59);
+  assert.equal(new Set(tags).size, 58);
 });
 
 test('loadCategories 对不存在的仓库根返回错误而非抛异常', () => {

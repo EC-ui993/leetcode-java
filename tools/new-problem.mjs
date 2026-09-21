@@ -23,8 +23,9 @@ import { parseFrontmatter, stringifyFrontmatter } from './lib/frontmatter.mjs';
 import { localDate, slugify, padNum } from './lib/util.mjs';
 
 const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
-const STATUSES = ['独立完成', '看题解完成', '未通过'];
-const DEFAULT_STATUS = '独立完成';
+const STATUSES = ['未开始', '独立完成', '看题解完成', '未通过'];
+// 脚手架绝不替用户宣称「已完成」：默认是未开始，由你自己改成实际状态。
+const DEFAULT_STATUS = '未开始';
 const MAX_PATH = 240; // Windows 默认上限 260，留 20 字符余量
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 

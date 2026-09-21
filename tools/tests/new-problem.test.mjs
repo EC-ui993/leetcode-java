@@ -48,7 +48,11 @@ test('合法参数创建成功，front-matter 各字段正确', () => {
     assert.equal(data.category, '01-array-hash');
     assert.deepEqual(data.tags, ['数组', '哈希表']);
     assert.equal(data.difficulty, 'Easy');
-    assert.equal(data.status, '独立完成', 'status 默认应为「独立完成」而非「未开始」');
+    assert.equal(
+      data.status,
+      '未开始',
+      '脚手架绝不替用户宣称已完成：默认必须是「未开始」',
+    );
     assert.equal(data.date, localDate(), 'date 默认应为本地时区的今天');
     assert.equal(data.url, 'https://leetcode.cn/problems/two-sum/');
 
@@ -175,12 +179,26 @@ test('非法 difficulty 退出码为 1', () => {
   }
 });
 
-test('非法 status 退出码为 1，且不再接受「未开始」', () => {
+test('非法 status 退出码为 1', () => {
   const root = makeFixture();
   try {
-    const r = runNewProblem([...BASE, '--status', '未开始', '--root', root]);
+    const r = runNewProblem([...BASE, '--status', '做完了', '--root', root]);
     assert.equal(r.code, 1);
+    assert.ok(r.stderr.includes('未开始'), r.stderr);
     assert.ok(r.stderr.includes('独立完成'), r.stderr);
+  } finally {
+    cleanup(root);
+  }
+});
+
+test('--status 显式给出时覆盖默认的「未开始」', () => {
+  const root = makeFixture();
+  try {
+    const r = runNewProblem([...BASE, '--status', '看题解完成', '--root', root]);
+    assert.equal(r.code, 0, r.stderr);
+    const readme = path.join(root, 'problems', '01-array-hash', 'lc-0001-two-sum', 'README.md');
+    const { data } = parseFrontmatter(fs.readFileSync(readme, 'utf8'));
+    assert.equal(data.status, '看题解完成');
   } finally {
     cleanup(root);
   }
