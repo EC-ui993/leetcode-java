@@ -2,7 +2,7 @@
 id: lc-0001
 title: 两数之和
 category: 01-array-hash
-tags: [数组, 哈希表]
+tags: [数组, 哈希表, Hot100]
 difficulty: Easy
 status: 独立完成
 url: https://leetcode.cn/problems/two-sum/

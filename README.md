@@ -96,14 +96,14 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 <!-- AUTO-GENERATED:START -->
 ## 进度
 
-**共 3 题** ｜ Easy 2 · Medium 1 · Hard 0 ｜ 最近 AC：2026-09-19
+**共 4 题** ｜ Easy 2 · Medium 2 · Hard 0 ｜ 最近 AC：2026-09-21
 
 ## 分类总览
 
 | 分类 | 题数 | 分类 | 题数 |
 |---|---:|---|---:|
 | 数组与哈希表 (`01-array-hash`) | 3 | 动态规划 (`10-dynamic-programming`) | 0 |
-| 双指针 (`02-two-pointers`) | 0 | 贪心 (`11-greedy`) | 0 |
+| 双指针 (`02-two-pointers`) | 1 | 贪心 (`11-greedy`) | 0 |
 | 滑动窗口 (`03-sliding-window`) | 0 | 堆与优先队列 (`12-heap`) | 0 |
 | 二分查找 (`04-binary-search`) | 0 | 字典树 (`13-trie`) | 0 |
 | 栈与队列 (`05-stack-queue`) | 0 | 并查集 (`14-union-find`) | 0 |
@@ -118,7 +118,13 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 
 | 题号 | 题名 | 难度 | 标签 | 状态 | 日期 |
 |---|---|---|---|---|---|
-| 0001 | [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) | Easy | 数组、哈希表 | 独立完成 | 2026-09-15 |
-| 0049 | [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) | Medium | 哈希表、字符串、排序 | 看题解完成 | 2026-09-18 |
+| 0001 | [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) | Easy | 数组、哈希表、Hot100 | 独立完成 | 2026-09-15 |
+| 0049 | [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) | Medium | 哈希表、字符串、排序、Hot100 | 看题解完成 | 2026-09-18 |
 | 0242 | [有效的字母异位词](problems/01-array-hash/lc-0242-valid-anagram/README.md) | Easy | 哈希表、字符串、排序 | 看题解完成 | 2026-09-19 |
+
+### 双指针（1）
+
+| 题号 | 题名 | 难度 | 标签 | 状态 | 日期 |
+|---|---|---|---|---|---|
+| 0167 | [两数之和 II - 输入有序数组](problems/02-two-pointers/lc-0167-two-sum-ii-input-array-is-sorted/README.md) | Medium | 双指针、数组 | 独立完成 | 2026-09-21 |
 <!-- AUTO-GENERATED:END -->

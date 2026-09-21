@@ -2,7 +2,7 @@
 id: lc-0049
 title: 字母异位词分组
 category: 01-array-hash
-tags: [哈希表, 字符串, 排序]
+tags: [哈希表, 字符串, 排序, Hot100]
 difficulty: Medium
 status: 看题解完成
 url: https://leetcode.cn/problems/group-anagrams/
