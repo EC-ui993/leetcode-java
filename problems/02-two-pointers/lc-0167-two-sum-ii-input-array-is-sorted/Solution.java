@@ -1,15 +1,17 @@
 /*
- * lc-0167 两数之和 II - 输入有序数组
- * 分类：02-two-pointers | 难度：Medium | 状态：独立完成 | 日期：2026-09-21
- * 原题：https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/
- *
- * 思路：
- * 复杂度：时间 O(?)，空间 O(?)
- *
- * 两条铁律：
- *   1. 不要写 package 声明 —— 写了 LeetCode 提交会直接报错
- *   2. 备选解法若要独立保留，另建 SolutionAlt.java（类名 SolutionAlt）
+ * lc-0167 两数之和 II - 输入有序数组 | 时间 O(n)，空间 O(1)
+ * 思路：两端向中间收缩，和偏大就排除右端、偏小就排除左端——每步都能永久扔掉一个元素
+ * 详见 README.md
  */
 class Solution {
-    // 在此粘贴 LeetCode 的方法签名与实现（保持可原样复制提交）
+    public int[] twoSum(int[] numbers, int target) {
+        int l = 0;
+        int r = numbers.length - 1;
+        while(l<r){
+            if(numbers[l] + numbers[r] == target) return new int[]{l+1,r+1};
+            if((numbers[l] + numbers[r]) < target) l++;
+            else r--;
+        }
+        return new int[]{-1,-1};
+    }
 }
