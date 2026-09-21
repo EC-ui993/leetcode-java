@@ -9,10 +9,11 @@
 <!-- AUTO-GENERATED:START -->
 词表共 58 个标签，当前已使用 8 个。
 
-### 数组（5）
+### 数组（6）
 
 - [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) — `lc-0001` · Easy
 - [盛最多水的容器](problems/02-two-pointers/lc-0011-container-with-most-water/README.md) — `lc-0011` · Medium
+- [三数之和](problems/02-two-pointers/lc-0015-3sum/README.md) — `lc-0015` · Medium
 - [最长连续序列](problems/01-array-hash/lc-0128-longest-consecutive-sequence/README.md) — `lc-0128` · Medium
 - [两数之和 II - 输入有序数组](problems/02-two-pointers/lc-0167-two-sum-ii-input-array-is-sorted/README.md) — `lc-0167` · Medium
 - [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) — `lc-0283` · Easy
@@ -32,9 +33,10 @@
 
 - [最长连续序列](problems/01-array-hash/lc-0128-longest-consecutive-sequence/README.md) — `lc-0128` · Medium
 
-### 双指针（3）
+### 双指针（4）
 
 - [盛最多水的容器](problems/02-two-pointers/lc-0011-container-with-most-water/README.md) — `lc-0011` · Medium
+- [三数之和](problems/02-two-pointers/lc-0015-3sum/README.md) — `lc-0015` · Medium
 - [两数之和 II - 输入有序数组](problems/02-two-pointers/lc-0167-two-sum-ii-input-array-is-sorted/README.md) — `lc-0167` · Medium
 - [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) — `lc-0283` · Easy
 
@@ -42,8 +44,9 @@
 
 - [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) — `lc-0283` · Easy
 
-### 排序（2）
+### 排序（3）
 
+- [三数之和](problems/02-two-pointers/lc-0015-3sum/README.md) — `lc-0015` · Medium
 - [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) — `lc-0049` · Medium
 - [有效的字母异位词](problems/01-array-hash/lc-0242-valid-anagram/README.md) — `lc-0242` · Easy
 

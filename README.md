@@ -97,13 +97,13 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 <!-- AUTO-GENERATED:START -->
 ## 进度
 
-**已完成 7 题** ｜ Easy 3 · Medium 4 · Hard 0 ｜ 最近 AC：2026-09-21
+**已完成 8 题** ｜ Easy 3 · Medium 5 · Hard 0 ｜ 最近 AC：2026-09-21
 
 ## 力扣热题 HOT 100 进度
 
-**5 / 100**（5%）
+**6 / 100**（6%）
 
-### 已完成（5）
+### 已完成（6）
 
 | 题号 | 题名 | 难度 | 状态 |
 |---|---|---|---|
@@ -112,6 +112,7 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 | 0128 | [最长连续序列](problems/01-array-hash/lc-0128-longest-consecutive-sequence/README.md) | Medium | 看题解完成 |
 | 0283 | [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) | Easy | 独立完成 |
 | 0011 | [盛最多水的容器](problems/02-two-pointers/lc-0011-container-with-most-water/README.md) | Medium | 看题解完成 |
+| 0015 | [三数之和](problems/02-two-pointers/lc-0015-3sum/README.md) | Medium | 看题解完成 |
 
 <details>
 <summary>全部 100 道清单</summary>
@@ -123,7 +124,7 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 | 0128 | 最长连续序列 | Medium | [✅ 已做](problems/01-array-hash/lc-0128-longest-consecutive-sequence/README.md) |
 | 0283 | 移动零 | Easy | [✅ 已做](problems/02-two-pointers/lc-0283-move-zeroes/README.md) |
 | 0011 | 盛最多水的容器 | Medium | [✅ 已做](problems/02-two-pointers/lc-0011-container-with-most-water/README.md) |
-| 0015 | 三数之和 | Medium |  |
+| 0015 | 三数之和 | Medium | [✅ 已做](problems/02-two-pointers/lc-0015-3sum/README.md) |
 | 0042 | 接雨水 | Hard |  |
 | 0003 | 无重复字符的最长子串 | Medium |  |
 | 0438 | 找到字符串中所有字母异位词 | Medium |  |
@@ -226,7 +227,7 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 | 分类 | 题数 | 分类 | 题数 |
 |---|---:|---|---:|
 | 数组与哈希表 (`01-array-hash`) | 4 | 动态规划 (`10-dynamic-programming`) | 0 |
-| 双指针 (`02-two-pointers`) | 3 | 贪心 (`11-greedy`) | 0 |
+| 双指针 (`02-two-pointers`) | 4 | 贪心 (`11-greedy`) | 0 |
 | 滑动窗口 (`03-sliding-window`) | 0 | 堆与优先队列 (`12-heap`) | 0 |
 | 二分查找 (`04-binary-search`) | 0 | 字典树 (`13-trie`) | 0 |
 | 栈与队列 (`05-stack-queue`) | 0 | 并查集 (`14-union-find`) | 0 |
@@ -246,11 +247,12 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 | 0128 | [最长连续序列](problems/01-array-hash/lc-0128-longest-consecutive-sequence/README.md) | Medium | 哈希集合、数组 | 看题解完成 | 2026-09-21 |
 | 0242 | [有效的字母异位词](problems/01-array-hash/lc-0242-valid-anagram/README.md) | Easy | 哈希表、字符串、排序 | 看题解完成 | 2026-09-19 |
 
-### 双指针（3）
+### 双指针（4）
 
 | 题号 | 题名 | 难度 | 标签 | 状态 | 日期 |
 |---|---|---|---|---|---|
 | 0011 | [盛最多水的容器](problems/02-two-pointers/lc-0011-container-with-most-water/README.md) | Medium | 双指针、数组、贪心 | 看题解完成 | 2026-09-21 |
+| 0015 | [三数之和](problems/02-two-pointers/lc-0015-3sum/README.md) | Medium | 双指针、数组、排序 | 看题解完成 | 2026-09-21 |
 | 0167 | [两数之和 II - 输入有序数组](problems/02-two-pointers/lc-0167-two-sum-ii-input-array-is-sorted/README.md) | Medium | 双指针、数组 | 独立完成 | 2026-09-21 |
 | 0283 | [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) | Easy | 双指针、数组、快慢指针 | 独立完成 | 2026-09-21 |
 <!-- AUTO-GENERATED:END -->
