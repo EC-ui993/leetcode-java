@@ -97,18 +97,19 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 <!-- AUTO-GENERATED:START -->
 ## 进度
 
-**已完成 5 题** ｜ Easy 3 · Medium 2 · Hard 0 ｜ 最近 AC：2026-09-21
+**已完成 6 题** ｜ Easy 3 · Medium 3 · Hard 0 ｜ 最近 AC：2026-09-21
 
 ## 力扣热题 HOT 100 进度
 
-**3 / 100**（3%）
+**4 / 100**（4%）
 
-### 已完成（3）
+### 已完成（4）
 
 | 题号 | 题名 | 难度 | 状态 |
 |---|---|---|---|
 | 0001 | [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) | Easy | 独立完成 |
 | 0049 | [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) | Medium | 看题解完成 |
+| 0128 | [最长连续序列](problems/01-array-hash/lc-0128-longest-consecutive-sequence/README.md) | Medium | 看题解完成 |
 | 0283 | [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) | Easy | 独立完成 |
 
 <details>
@@ -118,7 +119,7 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 |---|---|---|---|
 | 0001 | 两数之和 | Easy | [✅ 已做](problems/01-array-hash/lc-0001-two-sum/README.md) |
 | 0049 | 字母异位词分组 | Medium | [✅ 已做](problems/01-array-hash/lc-0049-group-anagrams/README.md) |
-| 0128 | 最长连续序列 | Medium |  |
+| 0128 | 最长连续序列 | Medium | [✅ 已做](problems/01-array-hash/lc-0128-longest-consecutive-sequence/README.md) |
 | 0283 | 移动零 | Easy | [✅ 已做](problems/02-two-pointers/lc-0283-move-zeroes/README.md) |
 | 0011 | 盛最多水的容器 | Medium |  |
 | 0015 | 三数之和 | Medium |  |
@@ -223,7 +224,7 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 
 | 分类 | 题数 | 分类 | 题数 |
 |---|---:|---|---:|
-| 数组与哈希表 (`01-array-hash`) | 3 | 动态规划 (`10-dynamic-programming`) | 0 |
+| 数组与哈希表 (`01-array-hash`) | 4 | 动态规划 (`10-dynamic-programming`) | 0 |
 | 双指针 (`02-two-pointers`) | 2 | 贪心 (`11-greedy`) | 0 |
 | 滑动窗口 (`03-sliding-window`) | 0 | 堆与优先队列 (`12-heap`) | 0 |
 | 二分查找 (`04-binary-search`) | 0 | 字典树 (`13-trie`) | 0 |
@@ -235,12 +236,13 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 
 ## 题目索引
 
-### 数组与哈希表（3）
+### 数组与哈希表（4）
 
 | 题号 | 题名 | 难度 | 标签 | 状态 | 日期 |
 |---|---|---|---|---|---|
 | 0001 | [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) | Easy | 数组、哈希表 | 独立完成 | 2026-09-15 |
 | 0049 | [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) | Medium | 哈希表、字符串、排序 | 看题解完成 | 2026-09-18 |
+| 0128 | [最长连续序列](problems/01-array-hash/lc-0128-longest-consecutive-sequence/README.md) | Medium | 哈希集合、数组 | 看题解完成 | 2026-09-21 |
 | 0242 | [有效的字母异位词](problems/01-array-hash/lc-0242-valid-anagram/README.md) | Easy | 哈希表、字符串、排序 | 看题解完成 | 2026-09-19 |
 
 ### 双指针（2）

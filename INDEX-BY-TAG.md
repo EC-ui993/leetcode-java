@@ -7,11 +7,12 @@
 标签词表的完整清单与新增规则见 [`categories.yml`](categories.yml)。
 
 <!-- AUTO-GENERATED:START -->
-词表共 58 个标签，当前已使用 6 个。
+词表共 58 个标签，当前已使用 7 个。
 
-### 数组（3）
+### 数组（4）
 
 - [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) — `lc-0001` · Easy
+- [最长连续序列](problems/01-array-hash/lc-0128-longest-consecutive-sequence/README.md) — `lc-0128` · Medium
 - [两数之和 II - 输入有序数组](problems/02-two-pointers/lc-0167-two-sum-ii-input-array-is-sorted/README.md) — `lc-0167` · Medium
 - [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) — `lc-0283` · Easy
 
@@ -25,6 +26,10 @@
 - [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) — `lc-0001` · Easy
 - [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) — `lc-0049` · Medium
 - [有效的字母异位词](problems/01-array-hash/lc-0242-valid-anagram/README.md) — `lc-0242` · Easy
+
+### 哈希集合（1）
+
+- [最长连续序列](problems/01-array-hash/lc-0128-longest-consecutive-sequence/README.md) — `lc-0128` · Medium
 
 ### 双指针（2）
 
