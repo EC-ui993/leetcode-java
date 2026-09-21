@@ -95,3 +95,29 @@ test('真实 docs/TEMPLATE.md 可被解析且无错误', async () => {
 
   assert.deepEqual(errors, []);
 });
+
+test('重复字段被检出，而不是静默覆盖', () => {
+  // 手写 front-matter 时最容易犯的错：另起一行写同名字段。
+  // 若不检出，前面的值会被静默丢弃 —— 属于「沉默失败」，比报错危险得多。
+  const { data, errors } = parseFrontmatter(
+    '---\ntags: [双指针, 数组]\ntags: [Hot100]\n---\n',
+  );
+
+  assert.ok(errors.length > 0, '重复字段必须报错');
+  assert.ok(
+    errors.some((e) => e.includes('重复')),
+    `错误信息应点明「重复」，实际为：${errors.join(' | ')}`,
+  );
+  // 报错即可，不关心保留哪个值；但必须让用户知道前一个被丢了
+  assert.ok(Array.isArray(data.tags));
+});
+
+test('重复字段的错误信息带行号且指出被丢弃的后果', () => {
+  const { errors } = parseFrontmatter('---\nid: lc-0001\nid: lc-9999\n---\n');
+  assert.ok(errors.some((e) => e.includes('第 3 行')), errors.join(' | '));
+});
+
+test('不同字段不算重复', () => {
+  const { errors } = parseFrontmatter('---\nid: lc-0001\ntitle: 两数之和\n---\n');
+  assert.deepEqual(errors, []);
+});

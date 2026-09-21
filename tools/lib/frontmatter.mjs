@@ -43,6 +43,9 @@ export function parseFrontmatter(text) {
 
   const data = {};
   const errors = [];
+  // 检重复字段：手写 front-matter 时「另起一行写同名字段」是最容易犯的错，
+  // 而不检出的话前面那行的值会被静默丢弃 —— 属于沉默失败，比报错危险得多。
+  const seenKeys = new Set();
 
   for (let i = 1; i < end; i++) {
     const raw = lines[i];
@@ -62,6 +65,16 @@ export function parseFrontmatter(text) {
 
     const key = m[1];
     const value = m[2].trim();
+
+    if (seenKeys.has(key)) {
+      errors.push(
+        `第 ${i + 1} 行：字段 \`${key}\` 重复定义。` +
+          `front-matter 里同名 key 只保留最后一个，前面那行的值会被静默丢弃。` +
+          `要追加取值请合并到同一行，例如 \`${key}: [a, b, c]\``,
+      );
+      continue;
+    }
+    seenKeys.add(key);
 
     if (value === '') {
       errors.push(
