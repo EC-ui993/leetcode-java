@@ -94,6 +94,16 @@ export function parseFrontmatter(text) {
         continue;
       }
       const inner = value.slice(1, -1).trim();
+      // 中文输入法下极容易打出全角逗号，而它会让整串被当成**一个**标签，
+      // 报错信息会变成「标签不在词表内 —— 数组，Hot100」这种看不懂的东西。
+      // 单独识别出来，直接告诉用户问题在哪。
+      if (inner.includes('，')) {
+        errors.push(
+          `第 ${i + 1} 行：字段 \`${key}\` 里出现了全角逗号「，」（中文输入法下极易打出来），` +
+            `请改成半角逗号「,」，例如 \`${key}: [a, b]\``,
+        );
+        continue;
+      }
       data[key] =
         inner === ''
           ? []

@@ -2,7 +2,7 @@
 id: lc-0167
 title: 两数之和 II - 输入有序数组
 category: 02-two-pointers
-tags: [双指针, 数组，Hot100]
+tags: [双指针, 数组]
 difficulty: Medium
 status: 独立完成
 url: https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/

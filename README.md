@@ -97,20 +97,19 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 <!-- AUTO-GENERATED:START -->
 ## 进度
 
-**已完成 4 题** ｜ 未开始 1 题 ｜ Easy 2 · Medium 2 · Hard 0 ｜ 最近 AC：2026-09-21
-
-进行中：`lc-0283` 移动零
+**已完成 5 题** ｜ Easy 3 · Medium 2 · Hard 0 ｜ 最近 AC：2026-09-21
 
 ## 力扣热题 HOT 100 进度
 
-**2 / 100**（2%）
+**3 / 100**（3%）
 
-### 已完成（2）
+### 已完成（3）
 
 | 题号 | 题名 | 难度 | 状态 |
 |---|---|---|---|
 | 0001 | [两数之和](problems/01-array-hash/lc-0001-two-sum/README.md) | Easy | 独立完成 |
 | 0049 | [字母异位词分组](problems/01-array-hash/lc-0049-group-anagrams/README.md) | Medium | 看题解完成 |
+| 0283 | [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) | Easy | 独立完成 |
 
 <details>
 <summary>全部 100 道清单</summary>
@@ -120,7 +119,7 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 | 0001 | 两数之和 | Easy | [✅ 已做](problems/01-array-hash/lc-0001-two-sum/README.md) |
 | 0049 | 字母异位词分组 | Medium | [✅ 已做](problems/01-array-hash/lc-0049-group-anagrams/README.md) |
 | 0128 | 最长连续序列 | Medium |  |
-| 0283 | 移动零 | Easy |  |
+| 0283 | 移动零 | Easy | [✅ 已做](problems/02-two-pointers/lc-0283-move-zeroes/README.md) |
 | 0011 | 盛最多水的容器 | Medium |  |
 | 0015 | 三数之和 | Medium |  |
 | 0042 | 接雨水 | Hard |  |
@@ -249,5 +248,5 @@ node --test "tools/tests/*.test.mjs"  # 工具链自身的测试（零 npm 依�
 | 题号 | 题名 | 难度 | 标签 | 状态 | 日期 |
 |---|---|---|---|---|---|
 | 0167 | [两数之和 II - 输入有序数组](problems/02-two-pointers/lc-0167-two-sum-ii-input-array-is-sorted/README.md) | Medium | 双指针、数组 | 独立完成 | 2026-09-21 |
-| 0283 | [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) | Easy | 双指针、数组、快慢指针 | 未开始 | 2026-09-21 |
+| 0283 | [移动零](problems/02-two-pointers/lc-0283-move-zeroes/README.md) | Easy | 双指针、数组、快慢指针 | 独立完成 | 2026-09-21 |
 <!-- AUTO-GENERATED:END -->

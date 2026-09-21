@@ -121,3 +121,22 @@ test('不同字段不算重复', () => {
   const { errors } = parseFrontmatter('---\nid: lc-0001\ntitle: 两数之和\n---\n');
   assert.deepEqual(errors, []);
 });
+
+test('数组里的全角逗号被单独识别出来', () => {
+  // 中文输入法下极易打错。若不单独识别，整串会被当成一个标签，
+  // 报错会变成「标签不在词表内 —— 数组，Hot100」，完全看不出问题在哪。
+  const { errors } = parseFrontmatter('---\ntags: [双指针, 数组，Hot100]\n---\n');
+
+  assert.ok(errors.length > 0);
+  assert.ok(
+    errors.some((e) => e.includes('全角逗号')),
+    `应点明是全角逗号，实际为：${errors.join(' | ')}`,
+  );
+  assert.ok(errors.some((e) => e.includes('半角')), '应告诉用户改成半角');
+});
+
+test('半角逗号的数组不受影响', () => {
+  const { data, errors } = parseFrontmatter('---\ntags: [双指针, 数组]\n---\n');
+  assert.deepEqual(errors, []);
+  assert.deepEqual(data.tags, ['双指针', '数组']);
+});
